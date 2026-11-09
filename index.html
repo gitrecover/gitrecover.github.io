@@ -795,6 +795,58 @@
     .floating-whatsapp .wa-phone { stroke-width: 2.8; }
     @media (max-width: 620px) { .floating-contact { width: 56px; height: 56px; bottom: 14px; } .floating-contact svg { width: 27px; height: 27px; } }
 
+
+    /* Requested compact header and live Bitcoin market indicator */
+    .navbar { gap: 18px; }
+    .crypto-ticker {
+      display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto;
+      padding: 7px 10px; border: 1px solid #d9e6f5; border-radius: 10px;
+      background: #f7fbff; color: #26364b; font-size: .78rem; line-height: 1.25;
+      white-space: nowrap;
+    }
+    .crypto-ticker .btc-symbol {
+      display: inline-grid; place-items: center; width: 23px; height: 23px;
+      border-radius: 50%; color: #fff; background: #f7931a; font-weight: 800;
+      font-size: .9rem;
+    }
+    .crypto-ticker strong { color: #101827; font-size: .82rem; }
+    .crypto-ticker .btc-change { font-weight: 750; }
+    .crypto-ticker .btc-change.up { color: #168d58; }
+    .crypto-ticker .btc-change.down { color: #d14343; }
+    .platform-mark svg, .service-mark svg {
+      display: block; width: 23px; height: 23px;
+    }
+    .service-mark svg { width: 27px; height: 27px; }
+    .platform-mark.youtube, .service-icon.youtube { background: #fff0f0; }
+    .platform-mark.gmail, .service-icon.gmail { background: #fff; }
+    .platform-mark.facebook, .service-icon.facebook { background: #eef5ff; }
+    .platform-mark.instagram, .service-icon.instagram { background: #fff2fa; }
+    .platform-mark.whatsapp, .service-icon.whatsapp { background: #effbf4; }
+    .platform-mark.linkedin, .service-icon.linkedin { background: #eef7ff; }
+    @media (max-width: 620px) {
+      html { scroll-padding-top: 84px; }
+      .navbar {
+        min-height: 0; padding: 6px 0 7px; display: flex;
+        flex-direction: row; align-items: center; justify-content: space-between;
+        flex-wrap: wrap; gap: 5px 8px;
+      }
+      .brand { gap: 7px; font-size: .88rem; }
+      .brand-icon { width: 31px; height: 31px; border-radius: 9px; }
+      .brand-icon svg { width: 20px; height: 20px; }
+      .brand small { font-size: .54rem; letter-spacing: .65px; }
+      .crypto-ticker { order: 2; padding: 4px 7px; gap: 5px; font-size: .68rem; }
+      .crypto-ticker .btc-symbol { width: 19px; height: 19px; font-size: .78rem; }
+      .crypto-ticker strong { font-size: .7rem; }
+      .nav-links {
+        order: 3; width: 100%; display: flex; flex-wrap: nowrap;
+        overflow-x: auto; justify-content: flex-start; gap: 7px 14px;
+        padding: 1px 0 2px; scrollbar-width: none;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { flex: 0 0 auto; font-size: .74rem; }
+      .nav-links .nav-cta { padding: 4px 8px; border-radius: 7px; }
+    }
+
   </style>
 </head>
 
@@ -825,6 +877,13 @@
         <a href="#faq">FAQ</a>
         <a class="nav-cta" href="#contact">Contact</a>
       </nav>
+
+      <div class="crypto-ticker" aria-label="Live Bitcoin price and 24-hour change">
+        <span class="btc-symbol" aria-hidden="true">₿</span>
+        <span><strong>BTC</strong> <span id="btcPrice">Loading…</span></span>
+        <span class="btc-change" id="btcChange">Live</span>
+      </div>
+
     </div>
   </header>
 
@@ -856,13 +915,13 @@
         <aside class="platform-panel" aria-label="Platforms and services covered">
           <div class="platform-panel-label">PLATFORMS &amp; TOPICS COVERED</div>
           <div class="platform-marks">
-            <span class="platform-mark google" title="Google and Gmail">G</span>
-            <span class="platform-mark facebook" title="Facebook">f</span>
-            <span class="platform-mark meta" title="Meta">∞</span>
-            <span class="platform-mark instagram" title="Instagram">◎</span>
-            <span class="platform-mark youtube" title="YouTube">▶</span>
-            <span class="platform-mark whatsapp" title="WhatsApp">◉</span>
-            <span class="platform-mark linkedin" title="LinkedIn">in</span>
+            <span class="platform-mark gmail" title="Gmail"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M6 12.5 24 26l18-13.5V36a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4z"/><path fill="#C5221F" d="M6 12.5 24 26v14H10a4 4 0 0 1-4-4z"/><path fill="#4285F4" d="M42 12.5 24 26v14h14a4 4 0 0 0 4-4z"/><path fill="#FBBC04" d="M6 12.5 24 26 6 40z"/><path fill="#34A853" d="M42 12.5 24 26l18 14z"/><path fill="#fff" d="M6 12.5 24 26l18-13.5-3-3L24 22 9 9.5z"/></svg></span>
+            <span class="platform-mark facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12a12 12 0 1 0-13.875 11.85v-8.38H7.08V12h3.045V9.35c0-3.005 1.79-4.665 4.53-4.665 1.312 0 2.685.234 2.685.234v2.95h-1.512c-1.49 0-1.953.925-1.953 1.875V12h3.323l-.531 3.47h-2.792v8.38A12.003 12.003 0 0 0 24 12"/></svg></span>
+            <span class="platform-mark meta" title="Meta"><svg viewBox="0 0 40 24" aria-hidden="true"><path d="M3 18C7 5 12 3 17 12l3 5c5 8 10 4 16-11" fill="none" stroke="#0866FF" stroke-width="4" stroke-linecap="round"/><path d="M3 18C8 5 13 5 19 15c5 8 10 4 15-8" fill="none" stroke="#0866FF" stroke-width="3" stroke-linecap="round"/></svg></span>
+            <span class="platform-mark instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGrad" x1="0" y1="24" x2="24" y2="0"><stop stop-color="#FFB13D"/><stop offset=".5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#8134AF"/></linearGradient></defs><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="url(#igGrad)" stroke-width="2.5"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="#C13584" stroke-width="2.2"/><circle cx="17.8" cy="6.5" r="1.35" fill="#FCAF45"/></svg></span>
+            <span class="platform-mark youtube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="4" width="21" height="16" rx="5" fill="#FF0033"/><path d="M10 8.3 16 12l-6 3.7z" fill="#fff"/></svg></span>
+            <span class="platform-mark whatsapp" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M12 2a9.7 9.7 0 0 0-8.36 14.62L2.4 22l5.53-1.2A9.7 9.7 0 1 0 12 2zm0 17.6a7.85 7.85 0 0 1-4-1.1l-.29-.17-3.28.71.7-3.2-.19-.32A7.86 7.86 0 1 1 12 19.6z"/><path fill="#25D366" d="M16.4 13.6c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.46-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg></span>
+            <span class="platform-mark linkedin" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 2H3.55C2.69 2 2 2.68 2 3.53v16.94c0 .85.69 1.53 1.55 1.53h16.9c.86 0 1.55-.68 1.55-1.53V3.53c0-.85-.69-1.53-1.55-1.53zM7.93 18.7H4.98V9.2h2.95zM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42zm12.25 10.8h-2.94v-4.62c0-1.1-.02-2.51-1.53-2.51-1.53 0-1.77 1.2-1.77 2.43v4.7H9.52V9.2h2.82v1.3h.04c.39-.74 1.35-1.52 2.78-1.52 2.97 0 3.54 1.95 3.54 4.49z"/></svg></span>
             <span class="platform-mark openai" title="ChatGPT and OpenAI">✳</span>
             <span class="platform-mark roblox" title="Roblox">R</span>
             <span class="platform-mark epic" title="Epic Games">E</span>
@@ -904,27 +963,27 @@
 
         <div class="service-grid">
           <article class="service-card">
-            <div class="service-icon service-mark" aria-hidden="true">G</div>
+            <div class="service-icon service-mark gmail" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M6 12.5 24 26l18-13.5V36a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4z"/><path fill="#C5221F" d="M6 12.5 24 26v14H10a4 4 0 0 1-4-4z"/><path fill="#4285F4" d="M42 12.5 24 26v14h14a4 4 0 0 0 4-4z"/><path fill="#FBBC04" d="M6 12.5 24 26 6 40z"/><path fill="#34A853" d="M42 12.5 24 26l18 14z"/><path fill="#fff" d="M6 12.5 24 26l18-13.5-3-3L24 22 9 9.5z"/></svg></div>
             <h3>Gmail &amp; Google Account Recovery</h3><p>Guidance for forgotten passwords, lost recovery methods, compromised sign-ins, and Google account access checks.</p>
             <a href="#contact" data-service="Gmail and Google Account Recovery">Discuss this issue →</a>
           </article>
           <article class="service-card">
-            <div class="service-icon service-mark" aria-hidden="true">f</div>
+            <div class="service-icon service-mark facebook" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12a12 12 0 1 0-13.875 11.85v-8.38H7.08V12h3.045V9.35c0-3.005 1.79-4.665 4.53-4.665 1.312 0 2.685.234 2.685.234v2.95h-1.512c-1.49 0-1.953.925-1.953 1.875V12h3.323l-.531 3.47h-2.792v8.38A12.003 12.003 0 0 0 24 12"/></svg></div>
             <h3>Facebook Account Recovery</h3><p>Understand official steps for hacked, disabled, locked, or inaccessible Facebook accounts and appeals.</p>
             <a href="#contact" data-service="Facebook Account Recovery">Discuss this issue →</a>
           </article>
           <article class="service-card">
-            <div class="service-icon service-mark" aria-hidden="true">◎</div>
+            <div class="service-icon service-mark instagram" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGrad" x1="0" y1="24" x2="24" y2="0"><stop stop-color="#FFB13D"/><stop offset=".5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#8134AF"/></linearGradient></defs><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="url(#igGrad)" stroke-width="2.5"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="#C13584" stroke-width="2.2"/><circle cx="17.8" cy="6.5" r="1.35" fill="#FCAF45"/></svg></div>
             <h3>Instagram Account Recovery</h3><p>Find the appropriate official route for hacked, disabled, impersonated, or locked Instagram accounts.</p>
             <a href="#contact" data-service="Instagram Account Recovery">Discuss this issue →</a>
           </article>
           <article class="service-card">
-            <div class="service-icon service-mark" aria-hidden="true">▶</div>
+            <div class="service-icon service-mark youtube" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="4" width="21" height="16" rx="5" fill="#FF0033"/><path d="M10 8.3 16 12l-6 3.7z" fill="#fff"/></svg></div>
             <h3>YouTube Channel Recovery</h3><p>Guidance for compromised channels, access loss, disabled channels, and official creator support routes.</p>
             <a href="#contact" data-service="YouTube Channel Recovery">Discuss this issue →</a>
           </article>
           <article class="service-card">
-            <div class="service-icon service-mark" aria-hidden="true">◉</div>
+            <div class="service-icon service-mark whatsapp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M12 2a9.7 9.7 0 0 0-8.36 14.62L2.4 22l5.53-1.2A9.7 9.7 0 1 0 12 2zm0 17.6a7.85 7.85 0 0 1-4-1.1l-.29-.17-3.28.71.7-3.2-.19-.32A7.86 7.86 0 1 1 12 19.6z"/><path fill="#25D366" d="M16.4 13.6c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.46-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg></div>
             <h3>WhatsApp Account Recovery</h3><p>Learn what to do after losing access, suspected account takeover, or verification and registration problems.</p>
             <a href="#contact" data-service="WhatsApp Account Recovery">Discuss this issue →</a>
           </article>
@@ -934,7 +993,7 @@
             <a href="#contact" data-service="Lost Cryptocurrency Recovery">Discuss this issue →</a>
           </article>
           <article class="service-card">
-            <div class="service-icon service-mark" aria-hidden="true">in</div>
+            <div class="service-icon service-mark linkedin" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 2H3.55C2.69 2 2 2.68 2 3.53v16.94c0 .85.69 1.53 1.55 1.53h16.9c.86 0 1.55-.68 1.55-1.53V3.53c0-.85-.69-1.53-1.55-1.53zM7.93 18.7H4.98V9.2h2.95zM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42zm12.25 10.8h-2.94v-4.62c0-1.1-.02-2.51-1.53-2.51-1.53 0-1.77 1.2-1.77 2.43v4.7H9.52V9.2h2.82v1.3h.04c.39-.74 1.35-1.52 2.78-1.52 2.97 0 3.54 1.95 3.54 4.49z"/></svg></div>
             <h3>LinkedIn Account Recovery</h3><p>Understand account restrictions, identity verification requests, compromised profiles, and support options.</p>
             <a href="#contact" data-service="LinkedIn Account Recovery">Discuss this issue →</a>
           </article>
@@ -1247,6 +1306,38 @@
         if (match) select.value = match.value;
       });
     });
+
+
+    // Live Bitcoin price and 24-hour movement (USD), refreshed every minute.
+    async function updateBitcoinTicker() {
+      const priceEl = document.getElementById("btcPrice");
+      const changeEl = document.getElementById("btcChange");
+      try {
+        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true", { cache: "no-store" });
+        if (!response.ok) throw new Error("Market data unavailable");
+        const data = await response.json();
+        const bitcoin = data && data.bitcoin;
+        if (!bitcoin || typeof bitcoin.usd !== "number") throw new Error("Invalid market data");
+        const change = Number(bitcoin.usd_24h_change);
+        priceEl.textContent = new Intl.NumberFormat("en-US", {
+          style: "currency", currency: "USD", maximumFractionDigits: 0
+        }).format(bitcoin.usd);
+        if (Number.isFinite(change)) {
+          changeEl.textContent = (change >= 0 ? "+" : "") + change.toFixed(2) + "%";
+          changeEl.classList.toggle("up", change >= 0);
+          changeEl.classList.toggle("down", change < 0);
+          changeEl.setAttribute("aria-label", "24-hour change " + change.toFixed(2) + " percent");
+        } else {
+          changeEl.textContent = "24h n/a";
+        }
+      } catch (error) {
+        priceEl.textContent = "Unavailable";
+        changeEl.textContent = "BTC";
+        changeEl.classList.remove("up", "down");
+      }
+    }
+    updateBitcoinTicker();
+    window.setInterval(updateBitcoinTicker, 60000);
 
     document.getElementById("contactForm").addEventListener("submit", function (event) {
       event.preventDefault();
